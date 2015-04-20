@@ -1,5 +1,6 @@
 package thread;
 
+import model.ResultListContainer;
 import service.ISearch;
 import service.SearchImpl;
 
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  */
 public class SearchThread implements Runnable {
 
-    private ISearch search = new SearchImpl();
+
     private File root;
     private String searchKey;
 
@@ -27,14 +28,20 @@ public class SearchThread implements Runnable {
     public void run() {
         File[] fileList;
         if ((root != null) && (searchKey != null)) {
-            fileList = root.listFiles();
-            for (File f : fileList) {
-                if (f.getName().equals(searchKey)) {
-                    search.addResult(f);
+            if (root.isDirectory()) {
+                fileList = root.listFiles();
+                for (File f : fileList) {
+                    compareFiles(f);
                 }
+            } else {
+                compareFiles(root);
             }
+        }
+    }
 
-
+    public void compareFiles(File f) {
+        if (f.getName().equals(searchKey)) {
+            ResultListContainer.ResultListHolder.RESULT_LIST.add(f);
         }
     }
 }

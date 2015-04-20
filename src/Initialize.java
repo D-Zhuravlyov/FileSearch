@@ -19,8 +19,8 @@ private ResultListContainer resList;
 
     public void showResults(){
         System.out.println("Search results: " +
-                "Found "+ resList.getResultList().size()+" results: ");
-        for(File f : resList.getResultList()){
+                "Found "+ ResultListContainer.getResultList().size()+" results: ");
+        for(File f : ResultListContainer.getResultList()){
             System.out.println(f.getName() + " " + f.getAbsolutePath());
         }
     }

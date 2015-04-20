@@ -13,28 +13,29 @@ public class SearchImpl implements ISearch {
 
     private   SearchThread searchThread;
     private File root;
-    private ResultListContainer res = new ResultListContainer();
-
+    private ResultListContainer resultListContainer;
 
 
 
     @Override
-    public void searchFile(String filename, File searchDirectory) {
-        if (searchDirectory.isDirectory()) {                          // Checking if the search directory is Directory, not a File
-            if (searchDirectory.listFiles() != null) {                // Checking if the directory is not empty
-                for (int i = 0; i < searchDirectory.listFiles().length; i++) {
-                        searchThread = new SearchThread(searchDirectory, filename);  // creating new thread which will check the search directory for having searching file
-                        searchThread.run();
-                        root = searchDirectory.listFiles()[i];
-                        searchFile(filename, root);        // recursively calling the "searchFile" method for all child folders one by one
-                }
+    public void searchFile(String fileName, String searchDirectory) {
+        File searchDirectoryFile = new File(searchDirectory);
+        if (searchDirectoryFile.isDirectory()) {                          // Checking if the search directory is Directory, not a File
+            if (searchDirectoryFile.listFiles() != null) {                // Checking if the directory is not empty
+               for (int i = 0; i < searchDirectoryFile.listFiles().length; i++) {
+                   root =  searchDirectoryFile.listFiles()[i];
+                   searchFile(fileName, root.getAbsolutePath());        // recursively calling the "searchFile" method for all child folders one by one
+                   searchThread = new SearchThread(root, fileName);  // creating new thread which will check the search directory for having searching file
+                   searchThread.run();
+               }
             }
         }
     }
 
-    @Override
-    public synchronized void addResult(File file) {
-        res.addResult(file);
-    }
+
+
+
+
+
 
 }

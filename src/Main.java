@@ -12,8 +12,8 @@ public class Main {
         String searchFileName = "av.jpg";
         ISearch iSearch = new SearchImpl();
         Initialize initialize = new Initialize();
-        File file = new File("/Users/apple/Desktop");
-        iSearch.searchFile(searchFileName, file /* initialize.getSystemRoot()*/);
+        String PATH = "/Users/apple/";
+        iSearch.searchFile(searchFileName, PATH /* initialize.getSystemRoot()*/);
         initialize.showResults();
     }
 }

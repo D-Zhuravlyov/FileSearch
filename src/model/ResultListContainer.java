@@ -16,9 +16,6 @@ public class ResultListContainer {
         public static final ArrayList<File> RESULT_LIST = new ArrayList<File>();
     }
 
-    public void addResult(File file) {
-        ResultListHolder.RESULT_LIST.add(file);
-    }
 
     public static ArrayList<File> getResultList() {
         return ResultListHolder.RESULT_LIST;

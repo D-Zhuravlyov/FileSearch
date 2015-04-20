@@ -6,6 +6,5 @@ import java.util.ArrayList;
 
 public interface ISearch {
 
-    void searchFile(String filename, File searchDirectory);
-    void addResult(File file);
+    void searchFile(String filename, String searchDirectory);
 }
