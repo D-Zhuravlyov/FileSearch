@@ -28,7 +28,7 @@ public class SearchThread implements Runnable {
     public void run() {
         File[] fileList;
         if ((root != null) && (searchKey != null)) {
-            if (root.isDirectory()) {
+            if (root.isDirectory() && (root.listFiles() != null)){
                 fileList = root.listFiles();
                 for (File f : fileList) {
                     compareFiles(f);
